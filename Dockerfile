@@ -36,7 +36,8 @@ RUN pip install torch==0.4.0 torchvision==0.2.1 numpy==1.14.3 \
 
 # copy code
 WORKDIR /module/workdir
-COPY PlanteomeDeepSegment /module/workdir
+RUN git clone https://github.com/DimTrigkakis/PlanteomeDeepSegment_0.3.git
+RUN mv PlanteomeDeepSegment_0.3 PlanteomeDeepSegment
 
 # run command
 ENV PYTHONPATH /module/workdir/PlanteomeDeepSegment:/module/workdir
