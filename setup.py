@@ -8,7 +8,7 @@ from bq.setup.module_setup import docker_setup
 
 def setup(i_params, *args, **kw):
     print('args={}, kw={}'.format(args, kw))
-    python_setup('PlanteomeDeepSegment.py', params=i_params)
+    # python_setup('PlanteomeDeepSegment.py', params=i_params)
     docker_setup('bisque_uplanteome', 'PlanteomeDeepSegment', 'planteomedeepsegment', params=i_params)
 
 
