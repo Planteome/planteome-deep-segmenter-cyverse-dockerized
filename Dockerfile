@@ -1,11 +1,7 @@
 
 # +
 # build:
-#   docker build -t ubisque:uplanteome -f Dockerfile .
-# run:
-#   docker run --name uplanteome ubisque:uplanteome 
-# check:
-#   docker logs -t uplanteome
+#   docker build --no-chache -t ubisque:uplanteome -f Dockerfile .
 # -
 
 # use ubuntu base image
@@ -25,6 +21,9 @@ RUN apt-get -y install python-pip python-setuptools python-dev \
 # fix certificate issue?
 RUN curl https://bootstrap.pypa.io/get-pip.py | python
 
+# install git
+RUN apt-get -y install git-core
+
 # install python dependencies
 RUN pip install --upgrade pip setuptools
 RUN pip install --ignore-installed scipy==1.0.1
@@ -34,12 +33,18 @@ RUN pip install torch==0.4.0 torchvision==0.2.1 numpy==1.14.3 \
     pillow==4.1.1 requests==2.10.0 libtiff==0.4.0             \
     tifffile==0.14.0 bqapi==0.5.9
 
+# configure to clone a private repo
+RUN mkdir /root/.ssh/
+ADD id_rsa /root/.ssh/id_rsa
+RUN touch /root/.ssh/known_hosts
+RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+
 # copy code
 WORKDIR /module/workdir
-RUN git clone https://github.com/DimTrigkakis/PlanteomeDeepSegment_0.3.git
+RUN git clone git@github.com:DimTrigkakis/PlanteomeDeepSegment_0.3.git
 RUN mv PlanteomeDeepSegment_0.3 PlanteomeDeepSegment
 
 # run command
 ENV PYTHONPATH /module/workdir/PlanteomeDeepSegment:/module/workdir
 ENV PATH /module/workdir/PlanteomeDeepSegment:/module/workdir:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-CMD [ 'python', 'PlanteomeDeepSegment.py' ]
+#CMD [ 'python', 'PlanteomeDeepSegment.py' ]
