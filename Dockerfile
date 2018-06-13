@@ -11,12 +11,10 @@ FROM ubuntu:16.04
 MAINTAINER Phil Daly "pndaly@cyverse.org"
 
 # update the distro
-RUN apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
-
-# install software
-RUN apt-get -y install python-pip python-setuptools python-dev \
-    python-lxml python-tk python-matplotlib python-numpy       \
-    python-scipy python-skimage gcc g++ curl
+RUN apt-get -y update && apt-get -y upgrade && apt-get -y autoremove &&  \
+    apt-get -y --no-install-recommends install python-pip python-setuptools \
+    python-dev python-lxml python-tk python-matplotlib python-numpy python-scipy \
+    python-skimage python-opencv gcc g++ curl
 
 # fix certificate issue?
 RUN curl https://bootstrap.pypa.io/get-pip.py | python
@@ -33,16 +31,9 @@ RUN pip install torch==0.4.0 torchvision==0.2.1 numpy==1.14.3 \
     pillow==4.1.1 requests==2.10.0 libtiff==0.4.0             \
     tifffile==0.14.0 bqapi==0.5.9
 
-# configure to clone a private repo
-RUN mkdir /root/.ssh/
-ADD id_rsa /root/.ssh/id_rsa
-RUN touch /root/.ssh/known_hosts
-RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
-
 # copy code
-WORKDIR /module/workdir
-RUN git clone git@github.com:DimTrigkakis/PlanteomeDeepSegment_0.3.git
-RUN mv PlanteomeDeepSegment_0.3 PlanteomeDeepSegment
+WORKDIR /module/workdir/PlanteomeDeepSegment
+COPY . /module/workdir/PlanteomeDeepSegment
 
 # run command
 ENV PYTHONPATH /module/workdir/PlanteomeDeepSegment:/module/workdir
