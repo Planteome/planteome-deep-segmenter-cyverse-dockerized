@@ -47,4 +47,4 @@ RUN mv PlanteomeDeepSegment_0.3 PlanteomeDeepSegment
 # run command
 ENV PYTHONPATH /module/workdir/PlanteomeDeepSegment:/module/workdir
 ENV PATH /module/workdir/PlanteomeDeepSegment:/module/workdir:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-#CMD [ 'python', 'PlanteomeDeepSegment.py' ]
+CMD [ 'python', 'PlanteomeDeepSegment.py' ]
