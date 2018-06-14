@@ -1,7 +1,7 @@
 
 # +
 # build:
-#   docker build --no-chache -t ubisque:uplanteome -f Dockerfile .
+#   docker build --no-chache -t bisque_uplanteome -f Dockerfile .
 # -
 
 # use ubuntu base image
@@ -18,9 +18,6 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y autoremove &&  \
 
 # fix certificate issue?
 RUN curl https://bootstrap.pypa.io/get-pip.py | python
-
-# install git
-RUN apt-get -y install git-core
 
 # install python dependencies
 RUN pip install --upgrade pip setuptools
