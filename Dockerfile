@@ -1,7 +1,7 @@
 
 # +
 # build:
-#   docker build --no-chache -t bisque_uplanteome -f Dockerfile .
+#   docker build --no-cache -t bisque_uplanteome -f Dockerfile .
 # -
 
 # use ubuntu base image
