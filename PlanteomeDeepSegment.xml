@@ -29,12 +29,12 @@
             </gobject>
         </tag>
 
-        <tag name="deepNetworkChoice" value="Simple Classification" type="combo">
+        <tag name="deepNetworkChoice" value="Simple" type="combo">
             <template>
                 <tag name="label" value="Pretrained network architecture"/>
                 <tag name="select">
-                    <value>Simple Classification</value>
-                    <value>Leaf Classification</value>
+                    <value>Simple</value>
+                    <value>Leaf</value>
                     <value>None</value>
                 </tag>
                 <tag name="editable" value="false" type="boolean"/>
